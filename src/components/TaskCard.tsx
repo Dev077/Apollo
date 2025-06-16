@@ -4,7 +4,15 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Task } from '../types';
 import { Colors } from '../constants/colors';
-import { commonStyles, categoryColors } from '../styles/consistentStyles';
+import { commonStyles } from '../styles/consistentStyles';
+
+// Define categoryColors locally
+const categoryColors = {
+  cognitive: '#3B82F6', // Blue
+  physical: '#EF4444',  // Red
+  social: '#F59E0B',    // Yellow/Orange
+  language: '#8B5CF6',  // Purple
+};
 
 interface TaskCardProps {
   task: Task;
@@ -22,7 +30,7 @@ export default function TaskCard({ task, onComplete }: TaskCardProps) {
 
   return (
     <TouchableOpacity
-      style={[styles.card, task.completed && styles.completedCard]}
+      style={[commonStyles.card, styles.card, task.completed && styles.completedCard]}
       onPress={() => !task.completed && onComplete(task.id)}
       disabled={task.completed}
     >
@@ -60,7 +68,6 @@ export default function TaskCard({ task, onComplete }: TaskCardProps) {
 
 const styles = StyleSheet.create({
   card: {
-    ...commonStyles.card,
     marginVertical: 8,
   },
   completedCard: {
